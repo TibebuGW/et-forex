@@ -5,7 +5,7 @@ import Amhara from "@/public/assets/bank-images/amhara.jpg";
 import Awash from "@/public/assets/bank-images/awash.jpg";
 import Berhan from "@/public/assets/bank-images/berhan.jpg";
 import Black from "@/public/assets/bank-images/black.jpg";
-import CBE from "@/public/assets/bank-images/CBE.jpg";
+import CBE from "@/public/assets/bank-images/cbe.jpg";
 import COOP from "@/public/assets/bank-images/coop.jpg";
 import Dashen from "@/public/assets/bank-images/dashen.jpg";
 import Enat from "@/public/assets/bank-images/enat.jpg";
