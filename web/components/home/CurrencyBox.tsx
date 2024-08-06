@@ -19,7 +19,7 @@ interface IProps {
 
 const CurrencyBox: React.FC<IProps> = ({ type }) => {
   return (
-    <div className="w-[90%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+    <div className="w-[100%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="h-full w-full rounded-sm bg-white dark:bg-black p-5">
         <div className="flex items-center justify-around my-3">
           <p className="text-2xl font-bold">{type}</p>
@@ -30,7 +30,7 @@ const CurrencyBox: React.FC<IProps> = ({ type }) => {
             </p>
           </div>
         </div>
-        <div className="w-[85%] flex justify-between items-center mx-auto my-2">
+        <div className="w-full flex justify-evenly items-center mx-auto my-2">
           <Select>
             <SelectTrigger className="">
               <SelectValue placeholder={<SelectCurrency name="USD" flag={USFlag} value="1" />} />

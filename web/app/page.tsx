@@ -1,6 +1,7 @@
 import React from "react";
 import CurrencyBox from "@/components/home/CurrencyBox";
 import Navbar from "@/components/general/Navbar";
+import Footer from "@/components/general/Footer";
 
 const Home: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const Home: React.FC = () => {
           <CurrencyBox type="Black Market Rate" />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
