@@ -13,8 +13,7 @@
     "lint-fix": "npm run lint -- --fix",
     "test": "jest",
     "coverage": "jest --coverage",
-    "test-all": "npm run check-prettier && npm run check-lint && npm run test && npm run build",
-    "prepare": "cd .. && husky web/.husky"
+    "test-all": "npm run check-prettier && npm run check-lint && npm run test && npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
