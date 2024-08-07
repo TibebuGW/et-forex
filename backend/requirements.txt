@@ -1,0 +1,8 @@
+fastapi
+unicorn[standard]
+sqlalchemy
+alembic
+psycopg2-binary
+python-dotenv
+requests
+httpx
