@@ -15,7 +15,7 @@ app = FastAPI()
 async def root():
     return {"message": "Hello World"}
 
-@app.get("/latest")
+@app.post("/latest")
 async def get_all_currency_info():
     bank_rate_response = requests.get(BANK_RATE_BASE_URL)
     black_market_response = requests.get(BLACK_MARKET_RATE_BASE_URL)
