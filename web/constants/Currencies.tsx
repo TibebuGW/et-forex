@@ -1,4 +1,4 @@
-import { USFlag, EUFlag, UKFlag, SWFlag, KWFlag } from "@/public/assets/flags";
+import { USFlag, EUFlag, UKFlag, SWFlag, KWFlag, CAFlag, AUFlag, JPFlag } from "@/public/assets/flags";
 interface ICurrency {
   name: string;
   longName: string;
@@ -30,6 +30,21 @@ const currencies: ICurrency[] = [
     name: "KWD",
     longName: "Kuwaiti Dinar",
     flag: KWFlag,
+  },
+  {
+    name: "AUD",
+    longName: "Australian Dollar",
+    flag: AUFlag,
+  },
+  {
+    name: "JPY",
+    longName: "Japanese Yen",
+    flag: JPFlag,
+  },
+  {
+    name: "CAD",
+    longName: "Canadian Dollar",
+    flag: CAFlag,
   },
 ];
 

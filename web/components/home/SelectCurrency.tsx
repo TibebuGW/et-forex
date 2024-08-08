@@ -20,7 +20,7 @@ const SelectCurrency: React.FC<ISelectCurrency> = ({ name, value, flag }) => {
         />
       </div>
       <div className="">
-        <div className="text-lg font-bold"><span className="text-4xl">{value}</span> {name}</div>
+        <div className="text-md font-bold"><span className="text-2xl">{value !== "1" ? parseFloat(value).toFixed(2) : value}</span> {name}</div>
       </div>
     </div>
   );

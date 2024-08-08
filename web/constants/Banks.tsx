@@ -22,7 +22,7 @@ import {
   Zemen,
 } from "@/public/assets/bank-images";
 
-interface IBank {
+export interface IBank {
   name: string;
   image: any;
 }
@@ -53,7 +53,7 @@ const banks: IBank[] = [
     image: Berhan,
   },
   {
-    name: "Commercial Bank of Ethiopia",
+    name: "CBE",
     image: CBE,
   },
   {
@@ -85,7 +85,7 @@ const banks: IBank[] = [
     image: Hijra,
   },
   {
-    name: "Nib Bank",
+    name: "NIB Bank",
     image: Nib,
   },
   {
@@ -93,7 +93,7 @@ const banks: IBank[] = [
     image: Oromia,
   },
   {
-    name: "Sinqee Bank",
+    name: "Sinqe Bank",
     image: Sinqee,
   },
   {
