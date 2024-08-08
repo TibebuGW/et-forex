@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ETFlag, USFlag } from "@/public/assets/flags";
 import { Black } from "@/public/assets/bank-images";
 import currencies, { type ICurrency } from "@/constants/Currencies";
+import { GoArrowSwitch } from "react-icons/go";
 import SelectCurrency from "./SelectCurrency";
 import { BlackMarketRates } from "@/types/currency_types";
 import SelectBank from "./SelectBank";
@@ -69,7 +70,7 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
   };
   return (
     <div className="w-[100%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
-      <div className="h-full w-full rounded-sm bg-white dark:bg-black p-5">
+      <div className="h-full w-full rounded-sm bg-white dark:bg-black p-2">
         <div className="flex items-center justify-around my-3">
           <p className="text-2xl font-bold">Black Market Rate</p>
           <div className="flex items-center justify-center border-2 border-green-600 text-green-600 rounded-full py-3 px-5">
@@ -79,7 +80,7 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
             </div>
           </div>
         </div>
-        <div className="w-full flex justify-evenly items-center mx-auto my-2">
+        <div className="w-full flex justify-evenly items-center mx-auto my-2 gap-2">
           <Select onValueChange={handleCurrencyChange}>
             <SelectTrigger className="">
               <SelectValue placeholder={<SelectCurrency name="USD" flag={USFlag} value="1" />} />
@@ -92,7 +93,9 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
               ))}
             </SelectContent>
           </Select>
-          <span className="text-3xl">=</span>
+          <span className="text-3xl">
+            <GoArrowSwitch className="w-[20px] h-[20px]" />
+          </span>
           <SelectCurrency name="ETB" flag={ETFlag} value={currencyMap(selectedCurrency)} />
         </div>
         <div className="py-2">
