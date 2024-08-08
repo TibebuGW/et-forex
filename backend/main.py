@@ -3,9 +3,11 @@ from dotenv import load_dotenv
 import requests
 import os
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 
 load_dotenv()
-
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 BANK_RATE_BASE_URL = os.getenv("BANK_RATE_BASE_URL")
 BLACK_MARKET_RATE_BASE_URL = os.getenv("BLACK_MARKET_RATE_BASE_URL")
 currencies = ["USD", "EUR", "GBP", "CHF", "KWD", "AUD", "JPY", "CAD"]
