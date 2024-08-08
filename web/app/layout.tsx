@@ -19,13 +19,26 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <PublicEnvScript />
-        <link rel="icon" type="image/x-icon" href="/public/assets/logo.png"></link>
+        <link rel="icon" type="image/x-icon" href="/public/assets/logo.png" />
+        {/* Google AdSense */}
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5056135639877632"
           crossOrigin="anonymous"
-          strategy="afterInteractive"
-        ></Script>
+        />
+        {/* Google Analytics */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-JR7FFDW4TQ"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-JR7FFDW4TQ');
+          `}
+        </Script>
       </head>
       <body className={exo.className}>
         <AuthProvider>
