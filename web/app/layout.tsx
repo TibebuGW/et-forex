@@ -6,7 +6,7 @@ import AuthProvider from "@/wrappers/AuthProvider";
 import GoogleAnalytics from "@/wrappers/GoogleAnalytics";
 import { Provider as StoreProvider } from "react-redux";
 import { store } from "@/redux/store";
-import { PublicEnvScript, env } from "next-runtime-env";
+import { PublicEnvScript } from "next-runtime-env";
 import Script from "next/script";
 
 const exo = Exo({ subsets: [] });
@@ -30,9 +30,7 @@ export default function RootLayout({
         {/* Google Analytics */}
       </head>
       <body className={exo.className}>
-        {env("NEXT_PUBLIC_GOOGLE_ANALYTICS") && (
-          <GoogleAnalytics gaId={env("NEXT_PUBLIC_GOOGLE_ANALYTICS") || ""} />
-        )}
+        <GoogleAnalytics />
         <AuthProvider>
           <ThemeProvider
             attribute="class"
