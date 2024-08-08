@@ -1,0 +1,10 @@
+pytelegrambotapi
+requests==2.31.0
+ws4py
+urllib3==1.26.12
+python-dotenv
+Flask
+pybase64
+Flask-Cors
+gunicorn
+waitress

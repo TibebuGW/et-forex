@@ -1,5 +1,5 @@
 import { USFlag, EUFlag, UKFlag, SWFlag, KWFlag, CAFlag, AUFlag, JPFlag } from "@/public/assets/flags";
-interface ICurrency {
+export interface ICurrency {
   name: string;
   longName: string;
   flag: any;
