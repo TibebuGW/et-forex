@@ -3,9 +3,10 @@ import { Exo } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/wrappers/ThemeProvider";
 import AuthProvider from "@/wrappers/AuthProvider";
+import GoogleAnalytics from "@/wrappers/GoogleAnalytics";
 import { Provider as StoreProvider } from "react-redux";
 import { store } from "@/redux/store";
-import { PublicEnvScript } from "next-runtime-env";
+import { PublicEnvScript, env } from "next-runtime-env";
 import Script from "next/script";
 
 const exo = Exo({ subsets: [] });
@@ -27,20 +28,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         {/* Google Analytics */}
-        <Script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-JR7FFDW4TQ"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-JR7FFDW4TQ');
-          `}
-        </Script>
       </head>
       <body className={exo.className}>
+        {env("NEXT_PUBLIC_GOOGLE_ANALYTICS") && (
+          <GoogleAnalytics gaId={env("NEXT_PUBLIC_GOOGLE_ANALYTICS") || ""} />
+        )}
         <AuthProvider>
           <ThemeProvider
             attribute="class"
