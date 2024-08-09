@@ -7,6 +7,7 @@ import SelectCurrency from "./SelectCurrency";
 import { BankRates } from "@/types/currency_types";
 import { GoArrowSwitch } from "react-icons/go";
 import SelectBank from "./SelectBank";
+import SelectType from "./SelectType";
 import {
   Select,
   SelectContent,
@@ -20,6 +21,7 @@ interface IProps {
 }
 
 const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
+  const [type, setType] = useState("sell");
   const [selectedBank, setSelectedBank] = useState<IBank | null>(null);
   const [selectedCurrency, setSelectedCurrency] = useState("USD");
   const [currentRate, setCurrentRate] = useState("0");
@@ -37,19 +39,31 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
 
   const getBankRate = (curCurrency: string, curBank: string) => {
     const bank = info.find((bank) => bank.currency === curCurrency);
+    if (type === "buy") {
+      return bank?.banks.find((b) => b.name === curBank)?.buy.toString() || "0";
+    }
     return bank?.banks.find((b) => b.name === curBank)?.sell.toString() || "0";
   };
 
   useEffect(() => {
+    // Update the bank list based on the selected currency
     const allBanks = updateBankList();
     setFilteredBanks(allBanks);
-
-    const firstBank = allBanks.length ? allBanks[0] : null;
-    setSelectedBank(firstBank);
-    const rate = getBankRate(selectedCurrency, firstBank?.name || "");
-    setCurrentRate(rate);
-    setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
-  }, [selectedCurrency, info]);
+  
+    // If the currently selected bank is not in the new list, select the first available bank
+    if (!allBanks.some((bank) => bank.name === selectedBank?.name)) {
+      const firstBank = allBanks.length ? allBanks[0] : null;
+      setSelectedBank(firstBank);
+      const rate = getBankRate(selectedCurrency, firstBank?.name || "");
+      setCurrentRate(rate);
+      setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
+    } else {
+      // Just update the rate for the currently selected bank
+      const rate = getBankRate(selectedCurrency, selectedBank?.name || "");
+      setCurrentRate(rate);
+      setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
+    }
+  }, [selectedCurrency, info, type]);
 
   const handleCurrencyChange = (value: string) => {
     setSelectedCurrency(value);
@@ -64,19 +78,25 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
   };
 
   const handleBaseCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setBaseCurrencyValue(e.target.value);
-    setQuoteCurrencyValue((parseFloat(e.target.value) * parseFloat(currentRate)).toFixed(4));
+    const newValue = e.target.value;
+    setBaseCurrencyValue(newValue);
+    setQuoteCurrencyValue((parseFloat(newValue) * parseFloat(currentRate)).toFixed(4));
   };
 
   const handleQuoteCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setQuoteCurrencyValue(e.target.value);
-    setBaseCurrencyValue((parseFloat(e.target.value) / parseFloat(currentRate)).toFixed(4));
+    const newValue = e.target.value;
+    setQuoteCurrencyValue(newValue);
+    setBaseCurrencyValue((parseFloat(newValue) / parseFloat(currentRate)).toFixed(4));
+  };
+
+  const handleTypeChange = (value: string) => {
+    setType(value);
   };
 
   return (
     <div className="w-[100%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="h-full w-full rounded-sm bg-white dark:bg-black p-2">
-        <div className="flex items-center justify-around my-3">
+        <div className="w-[90%] flex items-center justify-between my-3 mx-auto">
           <p className="text-2xl font-bold">Bank Rate</p>
           <div className="flex items-center justify-center border-2 border-green-600 text-green-600 rounded-full py-3 px-5">
             <div className="blink flex justify-center items-center gap-3">
@@ -98,7 +118,9 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
               ))}
             </SelectContent>
           </Select>
-          <span className="text-3xl"><GoArrowSwitch className="w-[20px] h-[20px]" /></span>
+          <span className="text-3xl">
+            <GoArrowSwitch className="w-[20px] h-[20px]" />
+          </span>
           <SelectCurrency name="ETB" flag={ETFlag} value={currentRate} />
         </div>
         <div className="flex justify-center">
@@ -153,15 +175,20 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
             </div>
           </div>
         </div>
-        <div className="flex justify-center mt-5">
-          <p className="text-xl font-bold">
-            <span className="pr-5">Today&apos;s Date:</span>
-            {new Date().toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })}
-          </p>
+        <div className="w-full flex justify-center items-center my-3">
+          <Select onValueChange={handleTypeChange} value={type}>
+            <SelectTrigger>
+              <SelectValue placeholder={<SelectType type="sell" />} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="buy">
+                <SelectType type="buy" />
+              </SelectItem>
+              <SelectItem value="sell">
+                <SelectType type="sell" />
+              </SelectItem>
+            </SelectContent>
+          </Select>
         </div>
       </div>
     </div>

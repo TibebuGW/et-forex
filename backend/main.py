@@ -50,7 +50,7 @@ async def get_all_currency_info():
                         continue
                     current_bank_name = rate["bank_name"] if rate["bank_name"] != "BOA" else "Abyssinia Bank"
                     current_info["banks"].append({
-                        "name": rate["bank_name"],
+                        "name": current_bank_name,
                         "buy": rate["buying_rate"],
                         "sell": rate["selling_rate"],
                         "time": rate["timestamp"],
