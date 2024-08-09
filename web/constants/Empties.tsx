@@ -25,3 +25,8 @@ export const defaultBlackMarketRates: BlackMarketRates = {
     GBP: 0,
     KWD: 0,
 };
+
+export const defaultInfo = {
+    bank_rates: defaultBankRates,
+    black_market_rates: defaultBlackMarketRates,
+};

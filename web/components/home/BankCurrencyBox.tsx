@@ -23,8 +23,8 @@ interface IProps {
 const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
   const [type, setType] = useState("sell");
   const [selectedBank, setSelectedBank] = useState<IBank | null>(null);
-  const [selectedCurrency, setSelectedCurrency] = useState("USD");
-  const [currentRate, setCurrentRate] = useState("0");
+  const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
+  const [currentRate, setCurrentRate] = useState<string>("0");
   const [filteredBanks, setFilteredBanks] = useState<IBank[]>([]);
   const [baseCurrencyValue, setBaseCurrencyValue] = useState("1");
   const [quoteCurrencyValue, setQuoteCurrencyValue] = useState("-");
@@ -49,7 +49,7 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
     // Update the bank list based on the selected currency
     const allBanks = updateBankList();
     setFilteredBanks(allBanks);
-  
+
     // If the currently selected bank is not in the new list, select the first available bank
     if (!allBanks.some((bank) => bank.name === selectedBank?.name)) {
       const firstBank = allBanks.length ? allBanks[0] : null;

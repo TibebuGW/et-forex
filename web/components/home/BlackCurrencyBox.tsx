@@ -54,7 +54,7 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
     setQuoteCurrencyValue(
       (parseFloat(baseCurrencyValue) * parseFloat(currencyMap(selectedCurrency))).toFixed(4)
     );
-  }, [info]);
+  }, [selectedCurrency, info]);
   const handleBaseCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setBaseCurrencyValue(e.target.value);
     setQuoteCurrencyValue(

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
 interface ISelectBank {
@@ -7,10 +7,11 @@ interface ISelectBank {
 }
 
 const SelectBank: React.FC<ISelectBank> = ({ name, logo }) => {
-    return (
+  return (
     <div className="flex gap-2 justify-center items-center">
-
-      <div className={`flex justify-center rounded-md items-center h-14 w-14 border-black dark:border-gray-300 border-solid border-2`}>
+      <div
+        className={`flex justify-center rounded-md items-center h-14 w-14 border-black dark:border-gray-300 border-solid border-2`}
+      >
         <Image
           src={logo}
           alt="something"

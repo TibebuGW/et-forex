@@ -1,23 +1,33 @@
 export type Bank = {
-    name: string;
-    buy: number;
-    sell: number;
-    time: string;
-    buy_diff: string;
-    sell_diff: string;
+  name: string;
+  buy: number;
+  sell: number;
+  time: string;
+  buy_diff: string;
+  sell_diff: string;
 };
 
 export type BankRates = {
-    currency: string;
-    banks: Bank[];
+  currency: string;
+  banks: Bank[];
 };
 
-export type BlackMarketRates = {
-    USD: number;
-    EUR: number;
-    CHF: number;
-    CAD: number;
-    AUD: number;
-    GBP: number;
-    KWD: number;
+export interface BlackMarketRates {
+  [key: string]: number;
+};
+
+export type InfoType = {
+  bank_rates: BankRates[];
+  black_market_rates: BlackMarketRates;
+};
+
+export type BankType = {
+  name: string;
+  image: any;
+};
+
+export type BankListType = {
+  bank: BankType;
+  buyingPrice: string;
+  sellingPrice: string;
 };

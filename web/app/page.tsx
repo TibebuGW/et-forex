@@ -3,16 +3,18 @@ import React, { useState, useEffect } from "react";
 import BankCurrencyBox from "@/components/home/BankCurrencyBox";
 import BlackCurrencyBox from "@/components/home/BlackCurrencyBox";
 import LoadingPage from "@/components/general/reusables/LoadingPage";
+import BankList from "@/components/home/BankList";
 import Navbar from "@/components/general/Navbar";
 import Footer from "@/components/general/Footer";
-import { BankRates, BlackMarketRates } from "@/types/currency_types";
-import { defaultBlackMarketRates } from "@/constants/Empties";
+import { BankRates, BlackMarketRates, InfoType } from "@/types/currency_types";
+import { defaultBlackMarketRates, defaultInfo } from "@/constants/Empties";
 import axios from "axios";
 import { env } from "next-runtime-env";
 
 const Home: React.FC = () => {
-  const [lastUpdatedTime, setLastUpdatedTime] = useState<string>("");
+  const [lastUpdatedTime, setLastUpdatedTime] = useState<string>(new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric" }));
   const [loading, setLoading] = useState<boolean>(true);
+  const [info, setInfo] = useState<InfoType>(defaultInfo);
   const [bankRate, setBankRate] = useState<BankRates[]>([]);
   const [blackMarketRate, setBlackMarketRate] = useState<BlackMarketRates>(defaultBlackMarketRates);
 
@@ -20,6 +22,7 @@ const Home: React.FC = () => {
     const response = await axios.post(`${env("NEXT_PUBLIC_BASE_URL")}latest`);
     setBankRate(response.data.bank_rates);
     setBlackMarketRate(response.data.black_market_rates);
+    setInfo(response.data);
   };
 
   useEffect(() => {
@@ -28,8 +31,8 @@ const Home: React.FC = () => {
 
     const interval = setInterval(() => {
       fetchRates();
-      setLastUpdatedTime(new Date().toLocaleTimeString("en-US"));
-    }, 10000);
+      setLastUpdatedTime(new Date().toLocaleTimeString("en-US", { hour: "numeric", minute: "numeric" }));
+    }, 60000);
 
     return () => {
       clearInterval(interval);
@@ -65,6 +68,9 @@ const Home: React.FC = () => {
             <div className="col-span-2 md:col-span-1">
               <BlackCurrencyBox info={blackMarketRate} />
             </div>
+          </div>
+          <div className="md:max-w-[90%] mx-auto px-2 my-10">
+            <BankList info={info} />
           </div>
           <Footer />
         </div>
