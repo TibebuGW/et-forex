@@ -1,5 +1,4 @@
-import {env} from "next-runtime-env"
-export const GA_TRACKING_ID = env("NEXT_PUBLIC_GOOGLE_ANALYTICS_ID") 
+export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID
 
 export const pageview = url => {
   window.gtag("config", GA_TRACKING_ID, {
