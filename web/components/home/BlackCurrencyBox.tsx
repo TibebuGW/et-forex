@@ -71,7 +71,7 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
   return (
     <div className="w-[100%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="h-full w-full rounded-sm bg-white dark:bg-black p-2">
-        <div className="w-[90%] flex items-center justify-between my-3 mx-auto">
+        <div className="w-[92%] flex items-center justify-between my-3 mx-auto">
           <p className="text-2xl font-bold">Black Market Rate</p>
           <div className="flex items-center justify-center border-2 border-green-600 text-green-600 rounded-full py-3 px-5">
             <div className="blink flex justify-center items-center gap-3">
