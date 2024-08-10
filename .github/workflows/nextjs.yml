@@ -14,7 +14,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x]  # Set this to the node version you are using
+        node-version: [18.x]  # Set this to the node version you are using
 
     steps:
     - name: Checkout code
