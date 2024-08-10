@@ -27,7 +27,7 @@ jobs:
 
     - name: Install dependencies
       working-directory: ./web  # Set this to the path of your Next.js project if different
-      run: npm install
+      run: npm install --force
 
     - name: Build
       working-directory: ./web  # Set this to the path of your Next.js project if different
