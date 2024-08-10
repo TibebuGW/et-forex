@@ -28,6 +28,7 @@
     "@reduxjs/toolkit": "^2.2.3",
     "@tanstack/react-table": "^8.20.1",
     "@testing-library/react-hooks": "^8.0.1",
+    "@vkruglikov/react-telegram-web-app": "^2.1.9",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "color-thief-react": "^2.1.0",

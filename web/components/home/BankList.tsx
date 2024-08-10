@@ -13,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useHapticFeedback } from "@vkruglikov/react-telegram-web-app";
 
 interface IProps {
   info: InfoType;
@@ -21,6 +22,7 @@ interface IProps {
 const BankList: React.FC<IProps> = ({ info }) => {
   const [data, setData] = useState<BankListType[]>([]);
   const [selectedCurrency, setSelectedCurrency] = useState<string>("USD");
+  const [selectionChanged] = useHapticFeedback()
   const updateBankList = () => {
     const currentCurrencyBanks = info.bank_rates.find((bank) => bank.currency === selectedCurrency);
     if (currentCurrencyBanks) {
@@ -60,6 +62,7 @@ const BankList: React.FC<IProps> = ({ info }) => {
   const handleCurrencyChange = (currency: string) => {
     setSelectedCurrency(currency);
     updateData(currency);
+    selectionChanged('heavy')
   };
 
   return (

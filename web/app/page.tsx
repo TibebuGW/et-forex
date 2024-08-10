@@ -17,6 +17,7 @@ const Home: React.FC = () => {
   const [info, setInfo] = useState<InfoType>(defaultInfo);
   const [bankRate, setBankRate] = useState<BankRates[]>([]);
   const [blackMarketRate, setBlackMarketRate] = useState<BlackMarketRates>(defaultBlackMarketRates);
+  
 
   const fetchRates = async () => {
     const response = await axios.post(`${env("NEXT_PUBLIC_BASE_URL")}latest`);

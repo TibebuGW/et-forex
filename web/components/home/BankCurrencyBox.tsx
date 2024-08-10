@@ -5,6 +5,7 @@ import currencies from "@/constants/Currencies";
 import banks, { type IBank } from "@/constants/Banks";
 import SelectCurrency from "./SelectCurrency";
 import { BankRates } from "@/types/currency_types";
+import { useHapticFeedback } from "@vkruglikov/react-telegram-web-app";
 import { GoArrowSwitch } from "react-icons/go";
 import SelectBank from "./SelectBank";
 import SelectType from "./SelectType";
@@ -28,6 +29,7 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
   const [filteredBanks, setFilteredBanks] = useState<IBank[]>([]);
   const [baseCurrencyValue, setBaseCurrencyValue] = useState("1");
   const [quoteCurrencyValue, setQuoteCurrencyValue] = useState("-");
+  const [selectionChanged] = useHapticFeedback();
 
   const updateBankList = () => {
     const currentCurrencyBanks = info.find((bank) => bank.currency === selectedCurrency);
@@ -46,11 +48,9 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
   };
 
   useEffect(() => {
-    // Update the bank list based on the selected currency
     const allBanks = updateBankList();
     setFilteredBanks(allBanks);
 
-    // If the currently selected bank is not in the new list, select the first available bank
     if (!allBanks.some((bank) => bank.name === selectedBank?.name)) {
       const firstBank = allBanks.length ? allBanks[0] : null;
       setSelectedBank(firstBank);
@@ -58,7 +58,6 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
       setCurrentRate(rate);
       setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
     } else {
-      // Just update the rate for the currently selected bank
       const rate = getBankRate(selectedCurrency, selectedBank?.name || "");
       setCurrentRate(rate);
       setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
@@ -67,6 +66,7 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
 
   const handleCurrencyChange = (value: string) => {
     setSelectedCurrency(value);
+    selectionChanged("heavy");
   };
 
   const handleBankChange = (value: string) => {
@@ -75,22 +75,24 @@ const BankCurrencyBox: React.FC<IProps> = ({ info }) => {
     const rate = getBankRate(selectedCurrency, value);
     setCurrentRate(rate);
     setQuoteCurrencyValue((parseFloat(baseCurrencyValue) * parseFloat(rate)).toFixed(4));
+    selectionChanged("heavy");
   };
 
   const handleBaseCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setBaseCurrencyValue(newValue);
-    setQuoteCurrencyValue((parseFloat(newValue) * parseFloat(currentRate)).toFixed(4));
+    selectionChanged('heavy')
+    setBaseCurrencyValue(e.target.value);
+    setQuoteCurrencyValue((parseFloat(e.target.value) * parseFloat(currentRate)).toFixed(4));
   };
 
   const handleQuoteCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    setQuoteCurrencyValue(newValue);
-    setBaseCurrencyValue((parseFloat(newValue) / parseFloat(currentRate)).toFixed(4));
+    selectionChanged('heavy')
+    setQuoteCurrencyValue(e.target.value);
+    setBaseCurrencyValue((parseFloat(e.target.value) / parseFloat(currentRate)).toFixed(4));
   };
 
   const handleTypeChange = (value: string) => {
     setType(value);
+    selectionChanged("heavy");
   };
 
   return (

@@ -19,7 +19,7 @@ const Navbar = () => {
     <div className="pt-3 w-full pb-[16px]">
       <div className="flex flex-row justify-between w-full h-16 py-2 lg:px-8 px-4 pt-4 ">
         <div className="flex items-center gap-4 mx-auto">
-          <Image src={Logo} alt="Logo" height={50} width={50} className="object-cover" />
+          <Image src={Logo} alt="Logo" height={80} width={80} className="object-cover" />
           <p className="text-xl font-bold">ET Forex</p>
         </div>
       </div>

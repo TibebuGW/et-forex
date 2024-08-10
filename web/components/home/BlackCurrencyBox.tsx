@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ETFlag, USFlag } from "@/public/assets/flags";
 import { Black } from "@/public/assets/bank-images";
 import currencies, { type ICurrency } from "@/constants/Currencies";
+import { useHapticFeedback } from "@vkruglikov/react-telegram-web-app";
 import { GoArrowSwitch } from "react-icons/go";
 import SelectCurrency from "./SelectCurrency";
 import { BlackMarketRates } from "@/types/currency_types";
@@ -24,6 +25,7 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
   const [filteredCurrency, setFilteredCurrency] = useState<ICurrency[]>([]);
   const [baseCurrencyValue, setBaseCurrencyValue] = useState("1");
   const [quoteCurrencyValue, setQuoteCurrencyValue] = useState("-");
+  const [selectionChanged] = useHapticFeedback();
   const currencyMap = (type: string) => {
     switch (type) {
       case "USD":
@@ -44,9 +46,12 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
         return "0";
     }
   };
+
   const handleCurrencyChange = (value: string) => {
     setSelectedCurrency(value);
+    selectionChanged("heavy");
   };
+
   useEffect(() => {
     setFilteredCurrency(
       currencies.filter((currency) => Object.prototype.hasOwnProperty.call(info, currency.name))
@@ -55,7 +60,9 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
       (parseFloat(baseCurrencyValue) * parseFloat(currencyMap(selectedCurrency))).toFixed(4)
     );
   }, [selectedCurrency, info]);
+
   const handleBaseCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    selectionChanged('heavy')
     setBaseCurrencyValue(e.target.value);
     setQuoteCurrencyValue(
       (parseFloat(e.target.value) * parseFloat(currencyMap(selectedCurrency))).toFixed(4)
@@ -63,11 +70,13 @@ const BlackCurrencyBox: React.FC<IProps> = ({ info }) => {
   };
 
   const handleQuoteCurrencyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    selectionChanged('heavy')
     setQuoteCurrencyValue(e.target.value);
     setBaseCurrencyValue(
       (parseFloat(e.target.value) / parseFloat(currencyMap(selectedCurrency))).toFixed(4)
     );
   };
+
   return (
     <div className="w-[100%] h-[450px] md:w-[600px] rounded-lg border-2 mx-auto shadow-sm shadow-gray-400 transition duration-300 p-[2px] bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
       <div className="h-full w-full rounded-sm bg-white dark:bg-black p-2">
