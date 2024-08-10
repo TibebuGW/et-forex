@@ -37,8 +37,8 @@ const BankList: React.FC<IProps> = ({ info }) => {
         ?.banks.find((b) => b.name === bank.name);
       return {
         bank: { name: bank.name, image: bank.image },
-        buyingPrice: bankRate?.buy.toString() || "0",
-        sellingPrice: bankRate?.sell.toString() || "0",
+        buyingPrice: bankRate?.buy?.toString() || "0",
+        sellingPrice: bankRate?.sell?.toString() || "0",
       };
     });
     const blackRate = info.black_market_rates[curCurrency];
