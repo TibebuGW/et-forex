@@ -15,14 +15,6 @@ BASE_URL = os.getenv('BASE_URL')
 WEBHOOK_BASE_URL = os.getenv('WEBHOOK_BASE_URL')
 WEB_APP_URL = os.getenv('WEB_APP_URL')
 ENV = os.getenv('ENV')
-new_user_info = {
-    'first_name': '',
-    'last_name': '',
-    'phone_number': '',
-    'email': None,
-    'telegram_id': '',
-    'role_name': 'user'
-}
 app = Flask(__name__)
 bot = telebot.TeleBot(TOKEN)
 
@@ -66,7 +58,7 @@ def keep_alive():
             print("Sent keep-alive request.")
         except Exception as e:
             print("Error sending keep-alive request:", e)
-        threading.Timer(1500, keep_alive).start()
+        threading.Timer(15000, keep_alive).start()
 
 if ENV == "production":
     keep_alive()
